@@ -1,0 +1,25 @@
+# Entorno local: PostgreSQL + backend. Los valores sensibles salen del archivo .env (no versionado).
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: saapre
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD en .env}
+      SAAPRE_APP_PASSWORD: ${SAAPRE_APP_PASSWORD:?Define SAAPRE_APP_PASSWORD en .env}
+      SAAPRE_MIGRATOR_PASSWORD: ${SAAPRE_MIGRATOR_PASSWORD:?Define SAAPRE_MIGRATOR_PASSWORD en .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infra/db:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "127.0.0.1:5432:5432"   # solo accesible desde esta máquina
+
+  backend:
+    build: ./backend
+    env_file: .env
+    depends_on: [db]
+    ports:
+      - "127.0.0.1:8000:8000"
+
+volumes:
+  pgdata:

@@ -1,0 +1,52 @@
+# Secretos y configuración local (nunca se versionan)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets/
+credentials*.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Artefactos de modelos y datos (se regeneran; no van al repositorio)
+backend/models/
+backend/data/
+*.joblib
+*.pkl
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+
+# IDE y sistema
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+.docs/
+.scripts/
+~$*
+
+# Excluidos del repositorio publicado
+docs/
+scripts/
+.docs/
+.scripts/
